@@ -1,4 +1,6 @@
-package nl.rutsj.sort.Algorithms;
+package nl.rutsj.sort.algorithms;
+
+import nl.rutsj.sort.util.DataPair;
 
 /**
  *  This abstract class provides base functionality to be inherited and implemented
@@ -7,10 +9,14 @@ package nl.rutsj.sort.Algorithms;
 public abstract class SortingAlgorithm {
     protected int step = 0;
     protected int index = 0;
-    protected int[] list;
+    protected DataPair[] list;
 
-    public SortingAlgorithm(int[] list) {
-        this.list = list;
+    public SortingAlgorithm(int[] rawList) {
+        list = new DataPair[rawList.length];
+
+        for (int i = 0; i < rawList.length; i++) {
+            list[i] = new DataPair(rawList[i], "none");
+        }
     }
 
     public abstract void step();
@@ -22,7 +28,7 @@ public abstract class SortingAlgorithm {
      */
     public boolean isSorted() {
         for (int i = 1; i < list.length; i++) {
-            if ( !(list[i-1] <= list[i]) )
+            if ( !(list[i-1].getValue() <= list[i].getValue()) )
                 return false;
         }
         return true;
@@ -32,7 +38,7 @@ public abstract class SortingAlgorithm {
      * Return the current list of values in an array.
      * @return the array of values.
      */
-    public int[] getList() {
+    public DataPair[] getList() {
         return list;
     }
 
