@@ -60,4 +60,10 @@ public abstract class SortingAlgorithm {
      * @return returns the name of the algorithm as a String.
      */
     public abstract String getName();
+
+    protected void swap(int i, int j) {
+        int temp = list[i].getValue();
+        list[i].setValue(list[j].getValue());
+        list[j].setValue(temp);
+    }
 }

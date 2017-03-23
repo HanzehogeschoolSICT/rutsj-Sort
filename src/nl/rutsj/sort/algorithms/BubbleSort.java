@@ -37,13 +37,5 @@ public class BubbleSort extends SortingAlgorithm {
         step++;
     }
 
-    // Might be reusable for partition sort
-    // If so, move to abstract class with protected access
-    private void swap(int i, int j) {
-        int temp = list[i].getValue();
-        list[i].setValue(list[j].getValue());
-        list[j].setValue(temp);
-    }
-
     public String getName() { return NAME; }
 }
