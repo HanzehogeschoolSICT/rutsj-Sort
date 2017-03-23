@@ -55,4 +55,9 @@ public abstract class SortingAlgorithm {
     public int getStep() {
         return step;
     }
+
+    /**
+     * @return returns the name of the algorithm as a String.
+     */
+    public abstract String getName();
 }

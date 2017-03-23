@@ -5,6 +5,8 @@ package nl.rutsj.sort.algorithms;
  * Based on the BubbleSort implementation by Y. Daniel Liang.
  */
 public class BubbleSort extends SortingAlgorithm {
+    private static final String NAME = "BubbleSort";
+
     private boolean needNextPass = false;
     private int indexCap = 1;
 
@@ -14,21 +16,25 @@ public class BubbleSort extends SortingAlgorithm {
 
     @Override
     public void step() {
-            // Re-iterate
-            if (index >= list.length - indexCap && needNextPass) {
+        // Re-iterate
+        if (index >= list.length - indexCap) {
+            if (needNextPass) {
                 index = 0;
                 indexCap++;
                 needNextPass = false;
+            } else {
+                return;
             }
+        }
 
-            // Swap if greater than
-            if (list[index].getValue() > list[index + 1].getValue()) {
-                swap(index, index + 1);
-                needNextPass = true;
-            }
+        // Swap if greater than
+        if (list[index].getValue() > list[index + 1].getValue()) {
+            swap(index, index + 1);
+            needNextPass = true;
+        }
 
-            index++;
-            step++;
+        index++;
+        step++;
     }
 
     // Might be reusable for partition sort
@@ -38,4 +44,6 @@ public class BubbleSort extends SortingAlgorithm {
         list[i].setValue(list[j].getValue());
         list[j].setValue(temp);
     }
+
+    public String getName() { return NAME; }
 }

@@ -6,7 +6,7 @@ import nl.rutsj.sort.util.DataPair;
 
 public class Main {
     public static void main(String[] args) {
-        int[] list = new int[] { 80, 58, 41, 10, 2, 50, 9, 33, 64, 78, 9, 12, 95, 18, 59, 59, 97, 67, 32, 64};
+        int[] list = new int[] { 9, 11, 14, 1, 7, 5, 12, 19, 3, 20, 15, 0, 4, 17, 6, 18, 10, 16, 8, 13};
         SortingAlgorithm bubble = new BubbleSort(list);
 
 
@@ -29,6 +29,11 @@ public class Main {
                         + " step: " + bubble.getStep());
 
         System.out.println("Sorted: " + bubble.isSorted());
+
+        for (int i = 0; i < 20; i++)
+            bubble.step();
+
+        System.out.println("\n" + arrayToString(bubble.getList()));
     }
 
     private static String arrayToString(DataPair[] list) {
