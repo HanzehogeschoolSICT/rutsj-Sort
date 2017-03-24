@@ -32,5 +32,13 @@ public class InsertionSort extends SortingAlgorithm {
         }
     }
 
+    @Override
+    protected void resetCounters() {
+        step = 0;
+        i = 0;
+        k = i -1;
+        currentElement = list[i].getValue();
+    }
+
      public String getName() { return NAME; }
 }

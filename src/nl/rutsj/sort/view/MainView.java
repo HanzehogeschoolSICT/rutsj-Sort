@@ -7,6 +7,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
 import nl.rutsj.sort.controller.AnimationController;
 import nl.rutsj.sort.controller.Controller;
 import nl.rutsj.sort.model.AlgorithmModel;
@@ -44,9 +45,12 @@ public class MainView extends Application {
 
         // Pass the model to the controllers
         Model model = new AlgorithmModel();
-        settingsController.initModel(model);
-        controlsController.initModel(model);
-        animationController.initModel(model);
+        settingsController.init(model);
+        controlsController.init(model);
+        animationController.init(model);
+
+        // Stop the AlgorithmThread if the applications closes
+        stage.setOnCloseRequest( (event) -> model.pause() );
 
         stage.setTitle("Sort");
         stage.setScene(new Scene(root));

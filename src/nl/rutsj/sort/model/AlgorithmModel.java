@@ -12,14 +12,12 @@ import java.util.stream.IntStream;
 
 // TODO: support multiple algorithms
 public class AlgorithmModel extends Observable implements Model {
-    private DataPair[] data;
-
+    private AlgorithmThread algorithmThread;
     private SortingAlgorithm currentAlgorithm;
     private SortingAlgorithm[] algorithms; // Subject to change
 
     public AlgorithmModel() {
         currentAlgorithm = new BubbleSort(generateRandomList(20));
-        data = currentAlgorithm.getList();
     }
 
 
@@ -27,20 +25,44 @@ public class AlgorithmModel extends Observable implements Model {
     public void step() {
         currentAlgorithm.step();
 
-        data = currentAlgorithm.getList();
-
-        setChanged();
-        notifyObservers();
+        updateObservers();
     }
 
     @Override
     public void play(int interval) {
+        if (algorithmThread != null)
+            if (algorithmThread.isRunning())
+                return;
 
+        algorithmThread = new AlgorithmThread(this, interval);
+        new Thread(algorithmThread).start();
+    }
+
+    @Override
+    public void pause() {
+        if (algorithmThread != null)
+            algorithmThread.stop();
+    }
+
+    @Override
+    public void changeListSize(int size) {
+        currentAlgorithm.updateData( generateRandomList(size) );
+        updateObservers();
+    }
+
+    @Override
+    public void reset() {
+        changeListSize( currentAlgorithm.getList().length );
     }
 
     @Override
     public DataPair[] getData() {
-        return data;
+        return currentAlgorithm.getList();
+    }
+
+    @Override
+    public void changeAlgorithm(String algorithmName) {
+
     }
 
     @Override
@@ -58,9 +80,9 @@ public class AlgorithmModel extends Observable implements Model {
         return "Step: " + currentAlgorithm.getStep();
     }
 
-    @Override
-    public void stop() {
-        // TODO: stop thread
+    private void updateObservers() {
+        setChanged();
+        notifyObservers();
     }
 
     private static int[] generateRandomList(int size) {

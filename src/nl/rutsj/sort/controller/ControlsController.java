@@ -5,9 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.TextField;
+
 import nl.rutsj.sort.model.Model;
 
-public class ControlsController implements Controller{
+public class ControlsController extends Controller{
 
     @FXML
     private ButtonBar controlBar;
@@ -22,32 +23,36 @@ public class ControlsController implements Controller{
     private Button pauseButton;
 
     @FXML
-    private Button stepButton;
-
-    private Model model;
-
-    @Override
-    public void initModel(Model model) {
-        this.model = model;
-    }
+    private Button resetButton;
 
     @FXML
-    void pause(ActionEvent event) {
-        System.out.println("ControlsController.pause");
-        System.out.println("event = " + event);
+    private Button stepButton;
+
+    @Override
+    public void init(Model model) {
+        super.init(model);
+        setupDigitFieldListener(intervalField);
     }
 
     @FXML
     void play(ActionEvent event) {
-        System.out.println("ControlsController.play");
-        System.out.println("event = " + event);
+        String textValue = intervalField.getText();
+        int interval = textValue.equals("") ? 100 : Integer.parseInt(textValue);
+        model.play(interval);
+    }
+
+    @FXML
+    void pause(ActionEvent event) {
+        model.pause();
+    }
+
+    @FXML
+    void reset(ActionEvent event) {
+        model.reset();
     }
 
     @FXML
     void step(ActionEvent event) {
-        System.out.println("ControlsController.step");
-        System.out.println("event = " + event);
-
         model.step();
     }
 

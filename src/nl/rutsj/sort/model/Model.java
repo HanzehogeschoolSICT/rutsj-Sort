@@ -9,13 +9,20 @@ public interface Model {
     void step();
 
     void play(int interval);
+
+    void pause();
+
+    void changeListSize(int size);
+
+    void reset();
+
     DataPair[] getData();
+
+    void changeAlgorithm(String algorithmName);
 
     SortingAlgorithm getCurrentAlgorithm();
 
     SortingAlgorithm[] getAlgorithms();
-
-    void stop();
 
     void addObserver(Observer o);
 

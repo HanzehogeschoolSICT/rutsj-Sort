@@ -37,5 +37,13 @@ public class BubbleSort extends SortingAlgorithm {
         step++;
     }
 
+    @Override
+    protected void resetCounters() {
+        step = 0;
+        indexCap = 1;
+        index = 0;
+        needNextPass = false;
+    }
+
     public String getName() { return NAME; }
 }

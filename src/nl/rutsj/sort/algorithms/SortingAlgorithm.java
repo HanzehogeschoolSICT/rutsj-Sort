@@ -12,14 +12,22 @@ public abstract class SortingAlgorithm {
     protected DataPair[] list;
 
     public SortingAlgorithm(int[] rawList) {
+        updateData(rawList);
+    }
+
+    public abstract void step();
+
+    public void updateData(int[] rawList) {
         list = new DataPair[rawList.length];
 
         for (int i = 0; i < rawList.length; i++) {
             list[i] = new DataPair(rawList[i], "none");
         }
+
+        resetCounters();
     }
 
-    public abstract void step();
+    protected abstract void resetCounters();
 
     /**
      * A simple function to determine if the array is sorted.

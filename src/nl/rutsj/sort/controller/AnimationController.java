@@ -1,17 +1,13 @@
 package nl.rutsj.sort.controller;
 
 import nl.rutsj.sort.model.Model;
-import nl.rutsj.sort.util.DataPair;
 import nl.rutsj.sort.view.View;
 
 import java.util.Observable;
 import java.util.Observer;
 
-public class AnimationController implements Observer, Controller {
+public class AnimationController extends Controller implements Observer {
     private View view;
-    private Model model;
-
-    private DataPair[] data; // Temporary
 
     public AnimationController(View view) {
         this.view = view;
@@ -19,14 +15,13 @@ public class AnimationController implements Observer, Controller {
 
     @Override
     public void update(Observable o, Object arg) {
-        data = model.getData();
-        view.update(data);
+        view.update( model.getData() );
         updateViewText();
     }
 
     @Override
-    public void initModel(Model model) {
-        this.model = model;
+    public void init(Model model) {
+        super.init(model);
         model.addObserver(this);
 
         // First tick

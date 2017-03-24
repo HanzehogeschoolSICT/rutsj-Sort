@@ -4,13 +4,12 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.TextField?>
 
-<!-- TODO: add reset button -->
-
 <ButtonBar fx:id="controlBar" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: #C8C8C8; -fx-border-width: 1 0 0 0;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.rutsj.sort.controller.ControlsController">
    <buttons>
       <TextField fx:id="intervalField" prefColumnCount="2" promptText="100" />
       <Button fx:id="playButton" mnemonicParsing="false" onAction="#play" text="Play" />
       <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#pause" text="Pause" />
+      <Button fx:id="resetButton" mnemonicParsing="false" onAction="#reset" text="Reset" />
       <Button fx:id="stepButton" mnemonicParsing="false" onAction="#step" text="Step" />
    </buttons>
 </ButtonBar>

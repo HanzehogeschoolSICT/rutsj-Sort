@@ -7,7 +7,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import nl.rutsj.sort.model.Model;
 
-public class SettingsController implements Controller{
+public class SettingsController extends Controller{
 
     @FXML
     private ComboBox<?> algorithmComboBox;
@@ -18,8 +18,6 @@ public class SettingsController implements Controller{
     @FXML
     private Button genListButton;
 
-    private Model model;
-
     @FXML
     void changeAlgorithm(ActionEvent event) {
         System.out.println("SettingsController.changeAlgorithm");
@@ -28,12 +26,13 @@ public class SettingsController implements Controller{
 
     @FXML
     void generateList(ActionEvent event) {
-        System.out.println("SettingsController.generateList");
-        System.out.println("event = " + event);
+        int size = Integer.parseInt( listSizeField.getText() );
+        model.changeListSize(size);
     }
 
     @Override
-    public void initModel(Model model) {
-        this.model = model;
+    public void init(Model model) {
+        super.init(model);
+        setupDigitFieldListener(listSizeField);
     }
 }
