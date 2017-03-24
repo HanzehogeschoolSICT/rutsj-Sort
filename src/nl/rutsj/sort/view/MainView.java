@@ -17,6 +17,10 @@ import java.io.IOException;
 
 public class MainView extends Application {
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     // TODO: refactor
     @Override
     public void start(Stage stage) throws IOException {

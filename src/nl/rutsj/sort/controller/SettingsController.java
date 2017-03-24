@@ -26,7 +26,8 @@ public class SettingsController extends Controller{
 
     @FXML
     void generateList(ActionEvent event) {
-        int size = Integer.parseInt( listSizeField.getText() );
+        String textValue = listSizeField.getText();
+        int size = textValue.equals("") ? 20 : Integer.parseInt(textValue);
         model.changeListSize(size);
     }
 

@@ -9,6 +9,7 @@ public class BubbleSort extends SortingAlgorithm {
 
     private boolean needNextPass = false;
     private int indexCap = 1;
+    private int previousIndex = 0;
 
     public BubbleSort(int[] list) {
         super(list);
@@ -16,6 +17,7 @@ public class BubbleSort extends SortingAlgorithm {
 
     @Override
     public void step() {
+        previousIndex = index;
         // Re-iterate
         if (index >= list.length - indexCap) {
             if (needNextPass) {
@@ -35,6 +37,8 @@ public class BubbleSort extends SortingAlgorithm {
 
         index++;
         step++;
+
+        updateHighlights();
     }
 
     @Override
@@ -43,6 +47,12 @@ public class BubbleSort extends SortingAlgorithm {
         indexCap = 1;
         index = 0;
         needNextPass = false;
+    }
+
+    @Override
+    protected void updateHighlights() {
+        list[previousIndex].setHighlight("none");
+        list[index].setHighlight("blue");
     }
 
     public String getName() { return NAME; }

@@ -25,6 +25,7 @@ public abstract class SortingAlgorithm {
         }
 
         resetCounters();
+        updateHighlights();
     }
 
     protected abstract void resetCounters();
@@ -41,6 +42,8 @@ public abstract class SortingAlgorithm {
         }
         return true;
     }
+
+    protected abstract void updateHighlights();
 
     /**
      * Return the current list of values in an array.

@@ -3,6 +3,7 @@ package nl.rutsj.sort.view;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -10,8 +11,6 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import nl.rutsj.sort.util.DataPair;
-
-// TODO: kijk naar http://stackoverflow.com/questions/27302875/set-bar-chart-column-width-size
 
 public class AnimationView extends BorderPane implements View {
     private Label lblStatus;
@@ -66,7 +65,6 @@ public class AnimationView extends BorderPane implements View {
             updateCategories();
 
         updateData();
-        updateHighlights();
     }
 
     private void updateCategories() {
@@ -80,14 +78,18 @@ public class AnimationView extends BorderPane implements View {
         series.getData().clear();
 
         for (int i = 0; i < data.length; i++) {
-            series.getData().add(
-                    new XYChart.Data<>(Integer.toString(i), data[i].getValue())
-            );
+            XYChart.Data<String, Number> datapoint = new XYChart.Data<>(Integer.toString(i), data[i].getValue());
+            series.getData().add(datapoint);
+            updateHighlight(datapoint, data[i]);
         }
     }
 
-    private void updateHighlights() {
-
+    private void updateHighlight(XYChart.Data<String, Number> datapoint, DataPair originalData) {
+        Node node = datapoint.getNode();
+        if (originalData.getHighlight().equals("none"))
+            node.setStyle("");
+        else
+            node.setStyle("-fx-bar-fill: " + originalData.getHighlight() + ";");
     }
 
     @Override

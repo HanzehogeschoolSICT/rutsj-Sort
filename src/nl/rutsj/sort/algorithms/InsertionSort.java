@@ -40,5 +40,10 @@ public class InsertionSort extends SortingAlgorithm {
         currentElement = list[i].getValue();
     }
 
-     public String getName() { return NAME; }
+    @Override
+    protected void updateHighlights() {
+        // TODO: implement
+    }
+
+    public String getName() { return NAME; }
 }
