@@ -17,7 +17,9 @@ public class InsertionSort extends SortingAlgorithm {
     @Override
     public void step(){
 
-        if(i < list.length) {
+        step++;
+
+        if(i < list.length && !this.isSorted()) {
 
             if (k >= 0 && list[k].getValue() > currentElement) {
                 swap(k + 1, k);
@@ -27,9 +29,15 @@ public class InsertionSort extends SortingAlgorithm {
 
             list[k + 1].setValue(currentElement);
             i++;
+            index++;
             currentElement = list[i].getValue();
             k = i - 1;
+
+        } else if(this.isSorted()){
+            //TODO determine action when list is sorted
+            System.out.println("The list is sorted");
         }
+
     }
 
     @Override
@@ -45,5 +53,5 @@ public class InsertionSort extends SortingAlgorithm {
         // TODO: implement
     }
 
-    public String getName() { return NAME; }
+     public String getName() { return NAME; }
 }
