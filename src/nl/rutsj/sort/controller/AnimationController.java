@@ -30,6 +30,6 @@ public class AnimationController extends Controller implements Observer {
 
     private void updateViewText() {
         view.setStatus(model.getStatus());
-        view.setTitle(model.getCurrentAlgorithm().getName());
+        view.setTitle(model.getCurrentAlgorithm());
     }
 }

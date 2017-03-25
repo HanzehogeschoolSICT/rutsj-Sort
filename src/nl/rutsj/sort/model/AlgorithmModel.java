@@ -1,25 +1,30 @@
 package nl.rutsj.sort.model;
 
 import nl.rutsj.sort.algorithms.BubbleSort;
+import nl.rutsj.sort.algorithms.InsertionSort;
 import nl.rutsj.sort.algorithms.SortingAlgorithm;
 import nl.rutsj.sort.util.DataPair;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-// TODO: support multiple algorithms
 public class AlgorithmModel extends Observable implements Model {
     private AlgorithmThread algorithmThread;
     private SortingAlgorithm currentAlgorithm;
-    private SortingAlgorithm[] algorithms; // Subject to change
+    private HashMap<String, SortingAlgorithm> algorithms = new HashMap<>();
 
     public AlgorithmModel() {
-        currentAlgorithm = new BubbleSort(generateRandomList(20));
-    }
+        int[] list = generateRandomList(20);
+        SortingAlgorithm bubbleSort = new BubbleSort(list);
+        SortingAlgorithm insertionSort = new InsertionSort(list);
 
+        algorithms.put(bubbleSort.getName(), bubbleSort);
+        algorithms.put(insertionSort.getName(), insertionSort);
+    }
 
     @Override
     public void step() {
@@ -62,17 +67,20 @@ public class AlgorithmModel extends Observable implements Model {
 
     @Override
     public void changeAlgorithm(String algorithmName) {
-
+        if ( !algorithms.keySet().contains(algorithmName) )
+            return;
+        currentAlgorithm = algorithms.get(algorithmName);
+        updateObservers();
     }
 
     @Override
-    public SortingAlgorithm getCurrentAlgorithm() {
-        return currentAlgorithm;
+    public String getCurrentAlgorithm() {
+        return currentAlgorithm.getName();
     }
 
     @Override
-    public SortingAlgorithm[] getAlgorithms() {
-        return new SortingAlgorithm[0];
+    public String[] getAlgorithms() {
+        return algorithms.keySet().toArray( new String[algorithms.size()] );
     }
 
     @Override

@@ -17,11 +17,10 @@ import java.io.IOException;
 
 public class MainView extends Application {
 
-    public static void main(String[] args) {
+    public static void startApplication(String[] args) {
         launch(args);
     }
 
-    // TODO: refactor
     @Override
     public void start(Stage stage) throws IOException {
         GridPane root = new GridPane();
@@ -45,8 +44,6 @@ public class MainView extends Application {
         root.add(centerPane, 0, 0, 2, 2);
         root.add(settingsView, 2, 0, 1, 2);
 
-        setConstrains(root);
-
         // Pass the model to the controllers
         Model model = new AlgorithmModel();
         settingsController.init(model);
@@ -56,12 +53,19 @@ public class MainView extends Application {
         // Stop the AlgorithmThread if the applications closes
         stage.setOnCloseRequest( (event) -> model.pause() );
 
-        stage.setTitle("Sort");
+        setConstrains(root);
+        setStageDimensions(stage);
+
+        stage.setTitle("Sorting assignment");
         stage.setScene(new Scene(root));
         stage.show();
     }
 
-    // TODO: Improve this function (preferably get rid of it)
+    private void setStageDimensions(Stage stage) {
+        stage.setMinHeight(300);
+        stage.setMinWidth(650);
+    }
+
     private static void setConstrains(GridPane pane) {
         pane.setPrefSize(800, 400);
         pane.setMinSize(400, 300);

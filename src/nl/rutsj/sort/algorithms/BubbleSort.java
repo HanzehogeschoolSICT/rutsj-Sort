@@ -24,9 +24,8 @@ public class BubbleSort extends SortingAlgorithm {
                 index = 0;
                 indexCap++;
                 needNextPass = false;
-            } else {
+            } else
                 return;
-            }
         }
 
         // Swap if greater than
@@ -37,7 +36,6 @@ public class BubbleSort extends SortingAlgorithm {
 
         index++;
         step++;
-
         updateHighlights();
     }
 

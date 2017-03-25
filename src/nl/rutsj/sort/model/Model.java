@@ -1,6 +1,5 @@
 package nl.rutsj.sort.model;
 
-import nl.rutsj.sort.algorithms.SortingAlgorithm;
 import nl.rutsj.sort.util.DataPair;
 
 import java.util.Observer;
@@ -20,9 +19,9 @@ public interface Model {
 
     void changeAlgorithm(String algorithmName);
 
-    SortingAlgorithm getCurrentAlgorithm();
+    String getCurrentAlgorithm();
 
-    SortingAlgorithm[] getAlgorithms();
+    String[] getAlgorithms();
 
     void addObserver(Observer o);
 
