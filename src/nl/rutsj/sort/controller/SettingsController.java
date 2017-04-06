@@ -32,6 +32,10 @@ public class SettingsController extends Controller{
     void generateList(ActionEvent event) {
         String textValue = listSizeField.getText();
         int size = textValue.equals("") ? 20 : Integer.parseInt(textValue);
+
+        // Minimal list of 5
+        if (size < 5)
+            size = 5;
         model.changeListSize(size);
     }
 

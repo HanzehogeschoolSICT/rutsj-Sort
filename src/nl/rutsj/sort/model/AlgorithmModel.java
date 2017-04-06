@@ -2,6 +2,7 @@ package nl.rutsj.sort.model;
 
 import nl.rutsj.sort.algorithms.BubbleSort;
 import nl.rutsj.sort.algorithms.InsertionSort;
+import nl.rutsj.sort.algorithms.QuickSort;
 import nl.rutsj.sort.algorithms.SortingAlgorithm;
 import nl.rutsj.sort.util.DataPair;
 
@@ -21,9 +22,11 @@ public class AlgorithmModel extends Observable implements Model {
         int[] list = generateRandomList(20);
         SortingAlgorithm bubbleSort = new BubbleSort(list);
         SortingAlgorithm insertionSort = new InsertionSort(list);
+        SortingAlgorithm quickSort = new QuickSort(list);
 
         algorithms.put(bubbleSort.getName(), bubbleSort);
         algorithms.put(insertionSort.getName(), insertionSort);
+        algorithms.put(quickSort.getName(), quickSort);
     }
 
     @Override
