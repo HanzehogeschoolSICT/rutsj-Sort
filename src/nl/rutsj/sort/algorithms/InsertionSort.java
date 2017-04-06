@@ -6,51 +6,46 @@ package nl.rutsj.sort.algorithms;
 public class InsertionSort extends SortingAlgorithm {
     private static final String NAME = "InsertionSort";
 
-    private int i = 1;
-    private int k = i - 1;
-    private int currentElement = list[i].getValue();
+    private int currentElement = index;
+    private int previousIndex = 0;
 
     public InsertionSort(int[] list){
         super(list);
+        index = 1;
     }
 
     @Override
-    public void step(){
+    public void step() {
+        if (index < list.length) {
+            step++;
 
-        step++;
-
-        if(i < list.length && !this.isSorted()) {
-
-            if (k >= 0 && list[k].getValue() > currentElement) {
-                swap(k + 1, k);
-                k--;
+            if (currentElement > 0 && list[currentElement - 1].getValue() > list[currentElement].getValue()) {
+                swap(currentElement, currentElement - 1);
+                currentElement--;
                 return;
             }
 
-            list[k + 1].setValue(currentElement);
-            i++;
+            previousIndex = index;
             index++;
-            currentElement = list[i].getValue();
-            k = i - 1;
 
-        } else if(this.isSorted()){
-            //TODO determine action when list is sorted
-            System.out.println("The list is sorted");
+            currentElement = index;
+
+            if (index < list.length)
+                updateHighlights();
         }
-
     }
 
     @Override
     protected void resetCounters() {
         step = 0;
-        i = 0;
-        k = i -1;
-        currentElement = list[i].getValue();
+        index = 1;
+        currentElement = index;
     }
 
     @Override
     protected void updateHighlights() {
-        // TODO: implement
+        list[previousIndex].setHighlight("none");
+        list[index].setHighlight("blue");
     }
 
      public String getName() { return NAME; }
